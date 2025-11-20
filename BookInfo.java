@@ -1,45 +1,51 @@
-package javalab;
-class Books{
+package exam;
+class Book{
 	String title;
 	String author;
-	final int bookId;
-	static int book_counter=1000;
-	static final String library_name="Central Library";
+	double price;
 	
-	Books(){
-		this.bookId = book_counter++;
-		title="nill";
-		author="author";
-	}
-	Books(String title,String author){
+	Book(String title,String author,double price){
 		this.title=title;
 		this.author=author;
-		this.bookId = book_counter++;
-		
+		this.price=price;
 	}
-	public void displayInfo() {
+	
+	 void displayDetails() {
 		System.out.println("Title: "+title);
 		System.out.println("Author: "+author);
-		System.out.println("Book id:"+bookId);
-	}
-	public void displayInfo(boolean showLibrary) {
-		if(showLibrary==true) {
-			displayInfo();
-			System.out.println("Library Name: "+library_name);
-		}
-	}
-	public void displayTotalBooks() {
-		System.out.println("Total Books added: "+(book_counter-1000));
+		System.out.println("Price: "+price);
 	}
 }
-
-public class BookInfo {
-
-	public static void main(String[] args) {
-		Books book=new Books();
-		book.displayInfo(true);
-		book.displayInfo();
-
+class EBook extends Book{
+	double fileSizeMB;
+	
+	EBook(double fileSizeMB,String title,String author,double price){
+		super(title,author,price);
+		this.fileSizeMB=fileSizeMB;
 	}
-
+	
+	void displayDetails() {
+		super.displayDetails();
+		System.out.println("FileSize: "+fileSizeMB);
+	}
+}
+class PrintedBook extends Book{
+	int numberOfPages;
+	
+	PrintedBook(int numberOfPages,String title,String author,double price){
+		super(title,author,price);
+		this.numberOfPages=numberOfPages;
+	}
+	void displayDetails() {
+		super.displayDetails();
+		System.out.println("number of pages: "+numberOfPages);
+	}
+}
+public class BookInfo{
+	public static void main(String [] args) {
+		EBook book1=new EBook(78.5,"HarryPotter","J.K Roling",299.0);
+		book1.displayDetails();
+		PrintedBook book2=new PrintedBook(82,"Java Learning","James O M",549.50);
+		book2.displayDetails();
+	}
 }
